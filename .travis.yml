@@ -1,0 +1,32 @@
+language: node_js
+node_js:
+  - 12
+
+branches:
+  only:
+  - main
+
+services:
+  - docker
+
+before_script:
+  # Copy all env variables into accessible .env file
+  - env > .env
+
+script:
+  - docker --version
+  # Build API
+  - docker build -t njyjn/udagram-api --env-file .env udagram-api/
+  # Build Feed
+  - docker build -t njyjn/udagram-feed --env-file .env udagram-feed/
+  # Build Frontend
+  - docker build -t njyjn/udagram-frontend --env-file .env udagram-frontend/
+  # Build Users
+  - docker build -t njyjn/udagram-users --env-file .env udagram-users/
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker image push njyjn/udagram-api
+  - docker image push njyjn/udagram-feed
+  - docker image push njyjn/udagram-frontend
+  - docker image push njyjn/udagram-users
