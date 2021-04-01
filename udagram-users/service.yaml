@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: users
   labels:
-    run: udagramng-users
+    service: users
 spec:
   ports:
   - name: "8081"
     port: 8081
     targetPort: 8081
   selector:
-    run: udagramng-users
+    service: users
