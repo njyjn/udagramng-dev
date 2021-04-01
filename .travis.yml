@@ -9,20 +9,16 @@ branches:
 services:
   - docker
 
-before_script:
-  # Copy all env variables into accessible .env file
-  - env > .env
-
 script:
   - docker --version
   # Build API
-  - docker build -t njyjn/udagram-api --env-file .env udagram-api/
+  - docker build -t njyjn/udagram-api udagram-api/
   # Build Feed
-  - docker build -t njyjn/udagram-feed --env-file .env udagram-feed/
+  - docker build -t njyjn/udagram-feed udagram-feed/
   # Build Frontend
-  - docker build -t njyjn/udagram-frontend --env-file .env udagram-frontend/
+  - docker build -t njyjn/udagram-frontend udagram-frontend/
   # Build Users
-  - docker build -t njyjn/udagram-users --env-file .env udagram-users/
+  - docker build -t njyjn/udagram-users udagram-users/
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
