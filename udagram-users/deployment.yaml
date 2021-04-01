@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagramng-users
+  labels:
+    app: udagramng-users
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: udagramng-users
+  template:
+    metadata:
+      labels:
+        app: udagramng-users
+    spec:
+      containers:
+      - name: udagramng-users
+        image: njyjn/udagram-users
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"       
+        ports:
+        - containerPort: 8081
+      restartPolicy: Always

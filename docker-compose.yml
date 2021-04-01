@@ -1,0 +1,22 @@
+version: "3"
+services:
+  users:
+    image: njyjn/udagram-users:latest
+    build: ./udagram-users
+    env_file: .env
+    restart: always
+  feed:
+    image: njyjn/udagram-feed:latest
+    build: ./udagram-feed
+    env_file: .env
+    restart: always
+  frontend:
+    image: njyjn/udagram-frontend:latest
+    build: ./udagram-frontend
+    ports:
+      - "8100:80"
+    restart: always
+  api:
+    image: njyjn/udagram-api:latest
+    build: ./udagram-api
+    restart: always
