@@ -28,7 +28,7 @@ import {V0_USER_MODELS} from './controllers/v0/model.index';
     origin: config.url,
   }));
 
-  app.use('/v0/', IndexRouter);
+  app.use('/', IndexRouter);
 
   // Start the Server
   app.listen( port, () => {

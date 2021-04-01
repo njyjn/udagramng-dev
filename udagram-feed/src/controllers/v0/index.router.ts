@@ -3,6 +3,6 @@ import {FeedRouter} from './feed/routes/feed.router';
 
 const router: Router = Router();
 
-router.use('/', FeedRouter);
+router.use('/v0/', FeedRouter);
 
 export const IndexRouter: Router = router;
